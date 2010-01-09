@@ -20,16 +20,9 @@ frame:EnableMouseWheel(true)
 frame:SetScript('OnMouseWheel', zoomMinimap)
 frame:Show()
 
-Minimap:ClearAllPoints()
-Minimap:SetPoint(BR, UIParent, BR, -10, 10)
-
-MinimapBackdrop:ClearAllPoints()
-MinimapBackdrop:SetPoint(MC, Minimap, MC, -10, -25)
-
 GameTimeFrame:Hide()
 MinimapBorderTop:Hide()
-MinimapToggleButton:Hide()
-MiniMapTracking:Hide()
+MiniMapWorldMapButton:Hide()
 MiniMapVoiceChatFrame:Hide()
 MiniMapVoiceChatFrame:SetScript('OnShow', MiniMapVoiceChatFrame.Hide)
 MiniMapWorldMapButton:Hide()
