@@ -6,12 +6,12 @@ local BL, BC, BR = 'BOTTOMLEFT', 'BOTTOM', 'BOTTOMRIGHT'
 
 local frame
 
-local function zoomMinimap()
-	if arg1 > 0 and Minimap:GetZoom() < 5 then
-		Minimap:SetZoom(Minimap:GetZoom() + 1)
-	elseif arg1 < 0 and Minimap:GetZoom() > 0 then
-		Minimap:SetZoom(Minimap:GetZoom() - 1)
-	end
+local function zoomMinimap(frame, delta)
+  if delta > 0 and Minimap:GetZoom() < 5 then
+    Minimap:SetZoom(Minimap:GetZoom() + 1)
+  elseif delta < 0 and Minimap:GetZoom() > 0 then
+    Minimap:SetZoom(Minimap:GetZoom() - 1)
+  end
 end
 
 frame = CreateFrame('Frame', 'idMinimapFrame', Minimap)
