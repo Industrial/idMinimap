@@ -1,0 +1,6 @@
+This addon changes some things around the minimap
+
+Features
+  - Removes the zoom buttons, world map icon and zone text.
+  - Zoom in and out with the mousewheel.
+
