@@ -1,12 +1,10 @@
-local _G = _G
-
 local TL, TC, TR = 'TOPLEFT',    'TOP',    'TOPRIGHT'
 local ML, MC, MR = 'LEFT',       'CENTER', 'RIGHT'
 local BL, BC, BR = 'BOTTOMLEFT', 'BOTTOM', 'BOTTOMRIGHT'
 
-local frame
+local event_frame = CreateFrame('Frame')
 
-local function zoomMinimap(frame, delta)
+local function zoom(frame, delta)
   if delta > 0 and Minimap:GetZoom() < 5 then
     Minimap:SetZoom(Minimap:GetZoom() + 1)
   elseif delta < 0 and Minimap:GetZoom() > 0 then
@@ -14,19 +12,37 @@ local function zoomMinimap(frame, delta)
   end
 end
 
-frame = CreateFrame('Frame', 'idMinimapFrame', Minimap)
-frame:SetAllPoints(Minimap)
-frame:EnableMouseWheel(true)
-frame:SetScript('OnMouseWheel', zoomMinimap)
-frame:Show()
+local function open_tracking(frame, button, ...)
+  if button == 'RightButton' then
+    MiniMapTrackingButton:GetScript('OnClick')()
+  else
+    Minimap_OnClick(Minimap)
+  end
+end
 
-GameTimeFrame:Hide()
-MinimapBorderTop:Hide()
-MiniMapWorldMapButton:Hide()
-MiniMapVoiceChatFrame:Hide()
-MiniMapVoiceChatFrame:SetScript('OnShow', MiniMapVoiceChatFrame.Hide)
-MiniMapWorldMapButton:Hide()
-MinimapZoneTextButton:Hide()
-MinimapZoomIn:Hide()
-MinimapZoomOut:Hide()
+local function enable()
+  Minimap:EnableMouseWheel(true)
+  Minimap:SetScript('OnMouseWheel', zoom)
+  Minimap:SetScript('OnMouseUp', open_tracking)
+
+  -- hide minimap elements
+  GameTimeFrame:Hide() -- calendar
+  TimeManagerClockButton:Hide()
+  MiniMapTracking:Hide()
+  MinimapBorderTop:Hide()
+  MiniMapWorldMapButton:Hide()
+  MiniMapVoiceChatFrame:Hide()
+  MiniMapVoiceChatFrame:SetScript('OnShow', MiniMapVoiceChatFrame.Hide)
+  MiniMapWorldMapButton:Hide()
+  MinimapZoneTextButton:Hide()
+  MinimapZoomIn:Hide()
+  MinimapZoomOut:Hide()
+end
+
+event_frame:SetScript('OnEvent', function(frame, event, ...)
+  if event == 'PLAYER_LOGIN' then
+    enable()
+  end
+end)
+event_frame:RegisterEvent('PLAYER_LOGIN')
 

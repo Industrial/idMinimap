@@ -1,6 +1,13 @@
 This addon changes some things around the minimap
 
 Features
-  - Removes the zoom buttons, world map icon and zone text.
-  - Zoom in and out with the mousewheel.
+  - Removes:
+    - Zone text
+    - World Map button
+    - Tracking button
+    - Zoom buttons
+    - Calendar button (I use /calendar)
+  - Adds:
+    - Mousewheel scrolling
+    - Right click to open the tracking menu
 
